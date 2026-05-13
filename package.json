@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "A TypeScript-based memory card game",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "tsc && open index.html"
+  },
+  "keywords": ["memory-game", "typescript", "web-components"],
+  "author": "Mohamed Atef"
+}
