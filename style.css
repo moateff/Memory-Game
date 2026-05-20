@@ -16,13 +16,16 @@ body {
     #123b8f,
     #1e5eff
   );
-  width: 100vw;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 html,
 body {
-  margin: 0;
-  overflow-x: hidden;
+  height: 100%;
   overscroll-behavior: none;
 }
 
