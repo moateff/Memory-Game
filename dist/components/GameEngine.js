@@ -99,7 +99,7 @@ export class GameEngine {
     endGame() {
         this.timer.stop();
         this.sound.playWin();
-        showWinPopup(this.state.score?.getCount() || 0, this.state.moves?.getCount() || 0, this.timer.getTime() || "00:00");
+        showWinPopup(this.state.moves?.getCount() || 0, this.timer.getTime() || "00:00");
         this.reset();
     }
     getBoard() {

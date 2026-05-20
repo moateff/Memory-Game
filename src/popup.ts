@@ -46,7 +46,7 @@ const moves = document.getElementById("moves") as HTMLDivElement;
 const time = document.getElementById("timer") as HTMLDivElement;
 
 
-export function showWinPopup(score: number, moves: number, time: string): void {
+export function showWinPopup(moves: number, time: string): void {
 
   winPopup.classList.remove("hidden");
 
@@ -56,7 +56,7 @@ export function showWinPopup(score: number, moves: number, time: string): void {
       `🎉 Congrats ${name}!`;
 
   winmessage.innerText =
-    `Score: ${score}  Moves: ${moves}  Time: ${time}s`;
+    `Moves: ${moves}  Time: ${time}s`;
 }
 
 playAgainButton.addEventListener("click", () => {

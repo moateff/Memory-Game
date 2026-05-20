@@ -177,7 +177,6 @@ export class GameEngine implements IEngineComponent {
     this.sound.playWin();
 
     showWinPopup(
-      this.state.score?.getCount() || 0,
       this.state.moves?.getCount() || 0,
       this.timer.getTime() || "00:00");
 

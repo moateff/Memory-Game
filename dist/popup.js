@@ -37,13 +37,13 @@ const playAgainButton = document.getElementById("play-again-button");
 const score = document.getElementById("score");
 const moves = document.getElementById("moves");
 const time = document.getElementById("timer");
-export function showWinPopup(score, moves, time) {
+export function showWinPopup(moves, time) {
     winPopup.classList.remove("hidden");
     const name = localStorage.getItem("username");
     winTitle.innerText =
         `🎉 Congrats ${name}!`;
     winmessage.innerText =
-        `Score: ${score}  Moves: ${moves}  Time: ${time}s`;
+        `Moves: ${moves}  Time: ${time}s`;
 }
 playAgainButton.addEventListener("click", () => {
     winPopup.classList.add("hidden");
