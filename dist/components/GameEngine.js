@@ -1,4 +1,5 @@
 import { GameSound } from "./GameSound.js";
+import { showWinPopup } from "../popup.js";
 export class GameEngine {
     constructor() {
         this.board = document.querySelector("#board");
@@ -98,7 +99,7 @@ export class GameEngine {
     endGame() {
         this.timer.stop();
         this.sound.playWin();
-        alert(`🎉 You Won!\nMoves: ${this.state.moves?.getCount()}\nTime: ${this.timer.getTime()}`);
+        showWinPopup(this.state.score?.getCount() || 0, this.state.moves?.getCount() || 0, this.timer.getTime() || "00:00");
         this.reset();
     }
     getBoard() {

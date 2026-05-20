@@ -4,13 +4,17 @@ import "./components/GameCounter.js";
 import "./components/GameTimer.js";
 import "./components/GameSound.js";
 import "./components/GameButton.js";
+import "./popup.js";
 
 import { GameEngine } from "./components/GameEngine.js";
 
 window.addEventListener("DOMContentLoaded", () => {
 
+  if (localStorage.getItem("username") === null) {
+    document.getElementById("registerPopup")?.classList.remove("hidden");
+  }
+
   const engine = new GameEngine();
 
   engine.init();
-
 });

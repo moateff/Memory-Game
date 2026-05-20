@@ -6,6 +6,7 @@ import { GameCard } from "./GameCard.js";
 import { GameCounter } from "./GameCounter.js";
 import { GameSound } from "./GameSound.js";
 import { GameTimer } from "./GameTimer.js";
+import { showWinPopup } from "../popup.js"
 
 export class GameEngine implements IEngineComponent {
 
@@ -175,7 +176,10 @@ export class GameEngine implements IEngineComponent {
 
     this.sound.playWin();
 
-    alert(`🎉 You Won!\nMoves: ${this.state.moves?.getCount()}\nTime: ${this.timer.getTime()}`);
+    showWinPopup(
+      this.state.score?.getCount() || 0,
+      this.state.moves?.getCount() || 0,
+      this.timer.getTime() || "00:00");
 
     this.reset();
   }
@@ -188,3 +192,4 @@ export class GameEngine implements IEngineComponent {
     return this.state.gameRunning;
   }
 }
+
