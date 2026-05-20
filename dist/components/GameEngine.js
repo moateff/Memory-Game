@@ -5,22 +5,22 @@ export class GameEngine {
         this.timer = document.querySelector("#timer");
         const moves = document.querySelector("#moves");
         const score = document.querySelector("#score");
+        this.button = document.querySelector("#start-btn");
         this.sound = new GameSound();
         this.state = {
             firstCard: null,
             secondCard: null,
             moves,
-            score
+            score,
+            gameRunning: false
         };
         this.board.setEngine(this);
+        this.button.setEngine(this);
     }
     init() {
         this.board.init();
+        this.board.lock();
         this.sound.init();
-        this.timer.start();
-        document.addEventListener("click", () => {
-            this.sound.playBackground();
-        }, { once: true });
     }
     selectCard(card) {
         if (this.board.isLocked())
@@ -75,7 +75,9 @@ export class GameEngine {
         this.state.score?.reset();
         this.resetSelection();
         this.board.reset();
-        this.timer.start();
+        this.board.lock();
+        this.button.reset();
+        this.state.gameRunning = false;
     }
     getTimer() {
         return this.timer?.getTime() || "00:00";
@@ -87,6 +89,12 @@ export class GameEngine {
             this.endGame();
         }
     }
+    startGame() {
+        this.state.gameRunning = true;
+        this.board.unlock();
+        this.timer.start();
+        // this.sound.playBackground();
+    }
     endGame() {
         this.timer.stop();
         this.sound.playWin();
@@ -95,6 +103,9 @@ export class GameEngine {
     }
     getBoard() {
         return this.board;
+    }
+    gameRunning() {
+        return this.state.gameRunning;
     }
 }
 //# sourceMappingURL=GameEngine.js.map

@@ -1,10 +1,9 @@
 export interface IBoardComponent {
 	init(): void;
-	
-	getNumberOfCards(): number;
-	
+
 	addCard(image: string): void;
-	
+	getNumberOfCards(): number;
+
 	shuffleCards(): void;
 	reset(): void;
 

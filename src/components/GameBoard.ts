@@ -76,7 +76,7 @@ export class GameBoard extends HTMLElement implements IBoardComponent {
     return card;
   }
 
-  render(): void {
+  private render(): void {
 
     this.innerHTML = `
       <div class="container">

@@ -1,7 +1,5 @@
 export interface ICardComponent {
-  id: string;
-
-  updateView(): void;
+  cardId: string;
 
   getImage(): string;
 

@@ -1,4 +1,5 @@
 export interface ICounterComponent {
-    increment(): void
-    reset(): void
+  getCount(): number
+  increment(): void
+  reset(): void
 }

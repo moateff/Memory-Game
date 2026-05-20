@@ -78,7 +78,7 @@ export class GameCard extends HTMLElement implements ICardComponent {
     this.updateView();
   }
 
-  updateView(): void {
+  private updateView(): void {
     if (!this.front || !this.back) return;
 
     const visible =

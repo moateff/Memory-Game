@@ -1,6 +1,7 @@
 import { IEngineComponent } from "../interfaces/IEngineComponent.js";
 import { EngineState } from "../models/EngineState.js";
 import { GameBoard } from "./GameBoard.js";
+import { GameButton } from "./GameButton.js";
 import { GameCard } from "./GameCard.js";
 import { GameCounter } from "./GameCounter.js";
 import { GameSound } from "./GameSound.js";
@@ -11,6 +12,7 @@ export class GameEngine implements IEngineComponent {
   private board: GameBoard;
   private sound: GameSound;
   private timer: GameTimer;
+  private button: GameButton;
 
   private state: EngineState;
 
@@ -24,28 +26,27 @@ export class GameEngine implements IEngineComponent {
 
     const score = document.querySelector("#score") as GameCounter;
 
+    this.button = document.querySelector("#start-btn") as GameButton;
+
     this.sound = new GameSound();
 
     this.state = {
       firstCard: null,
       secondCard: null,
       moves,
-      score
+      score,
+      gameRunning: false
     };
 
     this.board.setEngine(this);
+
+    this.button.setEngine(this);
   }
 
   init(): void {
     this.board.init();
+    this.board.lock();
     this.sound.init();
-
-    this.timer.start();
-
-    document.addEventListener("click", () => {
-        this.sound.playBackground();
-      }, { once: true }
-    );
   }
 
   selectCard(card: GameCard): void {
@@ -131,14 +132,15 @@ export class GameEngine implements IEngineComponent {
     this.timer.reset();
 
     this.state.moves?.reset();
-
     this.state.score?.reset();
 
     this.resetSelection();
-
     this.board.reset();
+    this.board.lock();
 
-    this.timer.start();
+    this.button.reset();
+
+    this.state.gameRunning = false;
   }
 
   getTimer(): string {
@@ -156,6 +158,17 @@ export class GameEngine implements IEngineComponent {
     }
   }
 
+  startGame(): void {
+
+    this.state.gameRunning = true;
+
+    this.board.unlock();
+
+    this.timer.start();
+
+    // this.sound.playBackground();
+  }
+
   endGame(): void {
 
     this.timer.stop();
@@ -171,4 +184,7 @@ export class GameEngine implements IEngineComponent {
     return this.board;
   }
 
+  gameRunning(): boolean {
+    return this.state.gameRunning;
+  }
 }

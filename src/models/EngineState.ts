@@ -7,4 +7,6 @@ export interface EngineState {
   
   moves: GameCounter | null;
   score: GameCounter | null;
+
+  gameRunning: boolean
 }
