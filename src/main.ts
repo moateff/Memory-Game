@@ -10,7 +10,7 @@ import { GameEngine } from "./components/GameEngine.js";
 
 window.addEventListener("DOMContentLoaded", () => {
 
-  if (localStorage.getItem("username") === null) {
+  if (sessionStorage.getItem("username") === null) {
     document.getElementById("registerPopup")?.classList.remove("hidden");
   }
 

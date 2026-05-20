@@ -154,7 +154,7 @@ export class GameEngine implements IEngineComponent {
 
     const target = this.board.getNumberOfCards() / 2;
 
-    if (score === target - 1) {
+    if (score === target) {
       this.endGame();
     }
   }

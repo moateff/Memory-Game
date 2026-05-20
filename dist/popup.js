@@ -4,46 +4,42 @@ const username = document.getElementById("username");
 const error = document.getElementById("error");
 registerButton.addEventListener("click", () => {
     const name = username.value;
-    if (!validateInput(name)) {
-        error.innerHTML = "Invalid username";
+    if (!validateInput(name))
         return;
-    }
-    localStorage.setItem("username", name);
+    sessionStorage.setItem("username", name.trim());
     username.value = "";
     registerPopup.remove();
 });
 function validateInput(name) {
-    if (!name.trim())
+    if (name.length > 0 && name[0] !== "@") {
+        error.innerHTML = "Username must start with @";
         return false;
-    if (name.length > 20)
+    }
+    if (name.includes(" ")) {
+        error.innerHTML = "Username must not contain spaces";
         return false;
-    if (name.includes(" ") || name[0] !== "@")
+    }
+    if (name.length > 10) {
+        error.innerHTML = "Username must be less than 10 characters";
         return false;
+    }
+    error.innerHTML = "";
     return true;
 }
 username.addEventListener("input", () => {
-    const name = username.value;
-    if (!validateInput(name)) {
-        error.innerHTML = "Invalid username";
-    }
-    else {
-        error.innerHTML = "";
-    }
+    validateInput(username.value);
 });
 const winPopup = document.getElementById("winPopup");
 const winTitle = document.getElementById("winTitle");
 const winmessage = document.getElementById("winMessage");
 const playAgainButton = document.getElementById("play-again-button");
-const score = document.getElementById("score");
-const moves = document.getElementById("moves");
-const time = document.getElementById("timer");
 export function showWinPopup(moves, time) {
     winPopup.classList.remove("hidden");
-    const name = localStorage.getItem("username");
+    const name = sessionStorage.getItem("username");
     winTitle.innerText =
         `🎉 Congrats ${name}!`;
     winmessage.innerText =
-        `Moves: ${moves}  Time: ${time}s`;
+        `Moves: ${moves},  Time: ${time}s`;
 }
 playAgainButton.addEventListener("click", () => {
     winPopup.classList.add("hidden");

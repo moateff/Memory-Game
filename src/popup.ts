@@ -7,12 +7,9 @@ registerButton.addEventListener("click", () => {
 
     const name = username.value;
 
-    if (!validateInput(name)) {
-        error.innerHTML = "Invalid username";
-        return;
-    }
+    if (!validateInput(name)) return;
 
-    localStorage.setItem("username", name);
+    sessionStorage.setItem("username", name.trim());
     username.value = "";
 
     registerPopup.remove();
@@ -20,20 +17,30 @@ registerButton.addEventListener("click", () => {
 
 function validateInput(name: string): boolean
 {
-    if (!name.trim()) return false;
-    if (name.length > 20) return false;
-    if (name.includes(" ") || name[0] !== "@") return false;
+    if (name.length > 0 && name[0] !== "@") 
+    {
+        error.innerHTML = "Username must start with @";
+        return false;
+    }
+
+    if (name.includes(" "))
+    {
+        error.innerHTML = "Username must not contain spaces";
+        return false;
+    }
+
+    if (name.length > 10) 
+    {
+        error.innerHTML = "Username must be less than 10 characters";
+        return false;
+    }
+
+    error.innerHTML = "";
     return true;
 }
 
 username.addEventListener("input", () => {
-    const name = username.value;
-
-    if (!validateInput(name)) {
-        error.innerHTML = "Invalid username";
-    } else {
-        error.innerHTML = "";
-    }
+    validateInput(username.value);
 });
 
 const winPopup = document.getElementById("winPopup") as HTMLDivElement;
@@ -41,22 +48,18 @@ const winTitle = document.getElementById("winTitle") as HTMLDivElement;
 const winmessage = document.getElementById("winMessage") as HTMLDivElement;
 const playAgainButton = document.getElementById("play-again-button") as HTMLButtonElement;
 
-const score = document.getElementById("score") as HTMLDivElement;
-const moves = document.getElementById("moves") as HTMLDivElement;
-const time = document.getElementById("timer") as HTMLDivElement;
-
 
 export function showWinPopup(moves: number, time: string): void {
 
   winPopup.classList.remove("hidden");
 
-  const name = localStorage.getItem("username");
+  const name = sessionStorage.getItem("username");
 
   winTitle.innerText =
       `🎉 Congrats ${name}!`;
 
   winmessage.innerText =
-    `Moves: ${moves}  Time: ${time}s`;
+    `Moves: ${moves},  Time: ${time}s`;
 }
 
 playAgainButton.addEventListener("click", () => {
