@@ -19,11 +19,11 @@ function validateInput(name) {
         error.innerHTML = "Username must start with @";
         return false;
     }
-    if (name.includes(" ")) {
+    if (name.trim().includes(" ")) {
         error.innerHTML = "Username must not contain spaces";
         return false;
     }
-    if (name.length > 10) {
+    if (name.trim().length > 10) {
         error.innerHTML = "Username must be less than 10 characters";
         return false;
     }
