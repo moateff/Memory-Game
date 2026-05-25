@@ -11,7 +11,11 @@ registerButton.addEventListener("click", () => {
     registerPopup.remove();
 });
 function validateInput(name) {
-    if (name.length > 0 && name[0] !== "@") {
+    if (name.length == 0) {
+        error.innerHTML = "Please enter a username";
+        return false;
+    }
+    if (name[0] !== "@") {
         error.innerHTML = "Username must start with @";
         return false;
     }
